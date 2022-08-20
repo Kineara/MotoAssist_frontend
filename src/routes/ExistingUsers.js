@@ -1,23 +1,24 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
 import { Link } from "react-router-dom"
+import Stack from '@mui/material/Stack';
 
-const existingUsers = () => {
-  const usernames = ["Riley", "Ecco"];
+const existingUsers = ({ existingUsers }) => {
+  const usernames = existingUsers.map((user) => user.name)
+
 
   const userButtons = usernames.map((user) => {
     return (
       <Link to={`/user`}>
-        <Button key={user}>{user}</Button>
+        <Button variant="outlined">{user}</Button>
       </Link>
     );
   });
 
   return (
-    <ButtonGroup size="large" aria-label="users">
+    <Stack direction="row" spacing={2}>
       {userButtons}
-    </ButtonGroup>
+    </Stack>
   );
 };
 

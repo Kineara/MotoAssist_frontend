@@ -1,21 +1,29 @@
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ExistingUsers from "./ExistingUsers";
 import { Link } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+
+
+
 
 const Home = () => {
-  return (
-    <>
-      <h1>Home</h1>
-      <div>
-        <ExistingUsers />
-      </div>
+  const [existingUsers, setExistingUsers] = useState([]);
 
-      <div>
+useEffect(() => {
+  fetch("http://localhost:9292/users")
+  .then(r => r.json())
+  .then(d => setExistingUsers(d))
+}, [])
+
+  return (
+    <Stack direction="column" spacing={2} alignItems="center">
+        <div>Select your Profile:</div>
+        <ExistingUsers existingUsers={existingUsers} />
         <Button color="secondary" variant="outlined">
           <Link to="/newUser">Create a New User</Link>
         </Button>
-      </div>
-    </>
+    </Stack>
   );
 };
 
