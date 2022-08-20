@@ -14,9 +14,25 @@ const Garage = ({ vehicleId }) => {
       .then((d) => setVehicleData(d));
   }, [vehicleId]);
 
+  function taskCompletedClickHandler(task) {
+    fetch(`http://localhost:9292/tasks/${task.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        completed: !task.completed,
+      }),
+    })
+    .then((r) => r.json())
+    .then((d) => setVehicleData(task.vehicle_Id))
+  }
+
+
+
   function getVehicleById() {
     let vehicle;
-    if (vehicleData.length !== 0) {
+    if (vehicleData.tasks) {
       return (
         <Stack direction="column" alignItems="center" spacing={2}>
           <Typography>
@@ -27,7 +43,13 @@ const Garage = ({ vehicleId }) => {
           <Typography>Upcoming Maintenance:</Typography>
           <Stack direction="row" spacing={2}>
             {vehicleData.tasks.map((task) => {
-              return <TaskCard taskData={task} key={task.id} />;
+              return (
+                <TaskCard
+                  taskData={task}
+                  taskCompletedClickHandler={taskCompletedClickHandler}
+                  key={task.id}
+                />
+              );
             })}
           </Stack>
         </Stack>
@@ -42,7 +64,9 @@ const Garage = ({ vehicleId }) => {
     <Stack direction="column" alignItems="center" spacing={2}>
       {getVehicleById()}
       <Link to="/user">
-        <Button variant="outlined">Back to Your Vehicles</Button>
+        <Button variant="outlined" color="secondary">
+          Back to Your Vehicles
+        </Button>
       </Link>
     </Stack>
   );
