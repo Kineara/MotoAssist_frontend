@@ -10,7 +10,7 @@ import NewUser from "../routes/NewUser";
 export default function App() {
   const [existingUsers, setExistingUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedUserData, setSelectedUserData] = useState([]);
+  // const [selectedUserData, setSelectedUserData] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:9292/users")
@@ -18,13 +18,13 @@ export default function App() {
       .then((d) => setExistingUsers(d));
   }, []);
 
-  useEffect(() => {
-    if (selectedUser !== null) {
-      fetch(`http://localhost:9292/users/${selectedUser}`)
-      .then((r) => r.json())
-      .then((d) => setSelectedUserData(d));
-    }
-  }, [selectedUser]);
+  // useEffect(() => {
+  //   if (selectedUser !== null) {
+  //     fetch(`http://localhost:9292/users/${selectedUser}`)
+  //     .then((r) => r.json())
+  //     .then((d) => setSelectedUserData(d));
+  //   }
+  // }, [selectedUser]);
 
   function userClickHandler(userId) {
     setSelectedUser(userId);
@@ -43,7 +43,7 @@ export default function App() {
               />
             }
           />
-          <Route path="user" element={<UserPage userData = {selectedUserData} />} />
+          <Route path="user" element={<UserPage userId = {selectedUser} />} />
           <Route path="newUser" element={<NewUser />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoPage />} />
