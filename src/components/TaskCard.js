@@ -8,11 +8,10 @@ import { Link } from "react-router-dom";
 
 export default function TaskCard({ taskData, taskCompletedClickHandler }) {
 
-
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography>{taskData.category}</Typography>
+        {/* <Typography>{taskData.category}</Typography> */}
         <Typography>{taskData.name}</Typography>
         <Typography><em>{taskData.description}</em></Typography>
         <Typography>{`Due by ${taskData.date_due}`}</Typography>

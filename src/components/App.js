@@ -10,8 +10,10 @@ import Garage from "../routes/Garage";
 
 export default function App() {
   const [existingUsers, setExistingUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(undefined);
+  const [selectedVehicle, setSelectedVehicle] = useState(undefined);
+
+  //console.log(selectedVehicle);
 
   useEffect(() => {
     fetch("http://localhost:9292/users")
@@ -27,6 +29,25 @@ export default function App() {
     setSelectedVehicle(vehicleId);
   }
 
+  function onVehicleDataChange(id) {
+    setSelectedVehicle(id);
+  }
+
+  // function taskCompletedClickHandler(task) {
+  //   console.log("task clicky fired");
+  //   fetch(`http://localhost:9292/tasks/${task.id}`, {
+  //     method: "PATCH",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       completed: !task.completed,
+  //     }),
+  //   })
+  //     .then((r) => r.json())
+  //     .then((d) => setSelectedVehicle(2));
+  // }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,9 +61,25 @@ export default function App() {
               />
             }
           />
-          <Route path="user" element={<UserPage userId={selectedUser} vehicleClickHandler={vehicleClickHandler}/>} />
+          <Route
+            path="user"
+            element={
+              <UserPage
+                userId={selectedUser}
+                vehicleClickHandler={vehicleClickHandler}
+              />
+            }
+          />
           <Route path="newUser" element={<NewUser />} />
-          <Route path="garage" element={<Garage vehicleId={selectedVehicle} />} />
+          <Route
+            path="garage"
+            element={
+              <Garage
+                vehicle={selectedVehicle}
+                onVehicleDataChange={onVehicleDataChange}
+              />
+            }
+          />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoPage />} />
         </Route>

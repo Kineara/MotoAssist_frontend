@@ -5,14 +5,18 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TaskCard from "../components/TaskCard";
 
-const Garage = ({ vehicleId }) => {
-  const [vehicleData, setVehicleData] = useState([]);
-
+const Garage = ({ vehicle, onVehicleDataChange }) => {
+  //const vehicleId = vehicle;
+  //console.log(vehicle);
+  const [vehicleId, setVehicleId] = useState(vehicle);
+  const [vehicleData, setVehicleData] = useState();
   useEffect(() => {
-    fetch(`http://localhost:9292/vehicles/${vehicleId}`)
-      .then((r) => r.json())
-      .then((d) => setVehicleData(d));
-  }, [vehicleId]);
+    if (vehicle !== undefined) {
+      fetch(`http://localhost:9292/vehicles/${vehicleId}`)
+        .then((r) => r.json())
+        .then((d) => setVehicleData(d));
+    }
+  }, [vehicleData]);
 
   function taskCompletedClickHandler(task) {
     fetch(`http://localhost:9292/tasks/${task.id}`, {
@@ -24,15 +28,14 @@ const Garage = ({ vehicleId }) => {
         completed: !task.completed,
       }),
     })
-    .then((r) => r.json())
-    .then((d) => setVehicleData(task.vehicle_Id))
+      .then((r) => r.json())
+      .then((d) => onVehicleDataChange(d.id))
+      .then((d) => setVehicleData(d));
   }
 
-
-
   function getVehicleById() {
-    let vehicle;
-    if (vehicleData.tasks) {
+    console.log(vehicleData)
+    if (vehicleData !== undefined) {
       return (
         <Stack direction="column" alignItems="center" spacing={2}>
           <Typography>
@@ -55,9 +58,8 @@ const Garage = ({ vehicleId }) => {
         </Stack>
       );
     } else {
-      vehicle = <Typography>Loading Vehicle Info...</Typography>;
+      return <Typography>Loading Vehicle Info...</Typography>;
     }
-    return vehicle;
   }
 
   return (
