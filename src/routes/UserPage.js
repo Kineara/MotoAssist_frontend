@@ -5,15 +5,13 @@ import Stack from "@mui/material/Stack";
 import BasicCard from "../components/Card";
 import Typography from "@mui/material/Typography";
 
-const UserPage = ({ userId }) => {
+const UserPage = ({ userId, vehicleClickHandler }) => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    //if (userId !== null) {
     fetch(`http://localhost:9292/users/${userId}`)
       .then((r) => r.json())
       .then((d) => setUserData(d));
-    //}
   }, [userId]);
 
   function fillGarage() {
@@ -21,13 +19,19 @@ const UserPage = ({ userId }) => {
     if (userData.vehicles) {
       if (userData.vehicles.length > 0) {
         garage = userData.vehicles.map((vehicle) => {
-          return <BasicCard vehicleData={vehicle} key={vehicle.id} />;
+          return (
+            <BasicCard
+              vehicleData={vehicle}
+              key={vehicle.id}
+              vehicleClickHandler={vehicleClickHandler}
+            />
+          );
         });
       } else {
-        return <Typography>It's kinda empty in here...</Typography>
+        return <Typography>It's kinda empty in here...</Typography>;
       }
     } else {
-      garage = <div>Loading Vehicles...</div>;
+      garage = <Typography>Loading Vehicles...</Typography>;
     }
     return garage;
   }
@@ -35,7 +39,7 @@ const UserPage = ({ userId }) => {
   return (
     <Stack direction="column" spacing={2} alignItems="center">
       <Typography>Hey {userData.name}!</Typography>
-      <div>Your Garage:</div>
+      <Typography>Your Vehicles:</Typography>
       <Stack direction="row" spacing={2} alignItems="center">
         {fillGarage()}
       </Stack>

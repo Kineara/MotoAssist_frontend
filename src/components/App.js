@@ -6,11 +6,12 @@ import NoPage from "../routes/NoPage";
 import DrawerAppBar from "../routes/AppBar";
 import UserPage from "../routes/UserPage";
 import NewUser from "../routes/NewUser";
+import Garage from "../routes/Garage";
 
 export default function App() {
   const [existingUsers, setExistingUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  // const [selectedUserData, setSelectedUserData] = useState([]);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:9292/users")
@@ -18,16 +19,12 @@ export default function App() {
       .then((d) => setExistingUsers(d));
   }, []);
 
-  // useEffect(() => {
-  //   if (selectedUser !== null) {
-  //     fetch(`http://localhost:9292/users/${selectedUser}`)
-  //     .then((r) => r.json())
-  //     .then((d) => setSelectedUserData(d));
-  //   }
-  // }, [selectedUser]);
-
   function userClickHandler(userId) {
     setSelectedUser(userId);
+  }
+
+  function vehicleClickHandler(vehicleId) {
+    setSelectedVehicle(vehicleId);
   }
 
   return (
@@ -43,8 +40,9 @@ export default function App() {
               />
             }
           />
-          <Route path="user" element={<UserPage userId = {selectedUser} />} />
+          <Route path="user" element={<UserPage userId={selectedUser} vehicleClickHandler={vehicleClickHandler}/>} />
           <Route path="newUser" element={<NewUser />} />
+          <Route path="garage" element={<Garage vehicleId={selectedVehicle} />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoPage />} />
         </Route>
