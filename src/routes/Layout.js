@@ -1,20 +1,25 @@
-import { Outlet, Link } from "react-router-dom";
+// import { Outlet, Link } from "react-router-dom";
+import DrawerAppBar from "../components/AppBar";
+
 
 const Layout = () => {
   return (
     <>
-      <nav>
+      <DrawerAppBar />
+      {/* <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              Home
+              </Link>
           </li>
           <li>
             <Link to="/about">About</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
-      <Outlet />
+      {/* <Outlet /> */}
     </>
   )
 };
