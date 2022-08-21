@@ -8,6 +8,7 @@ import NoPage from "./routes/NoPage";
 import UserPage from "./routes/UserPage";
 import NewUser from "./routes/NewUser";
 import Garage from "./routes/Garage";
+import DeleteUser from "./routes/DeleteUser"
 
 export default function App() {
 
@@ -18,6 +19,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="user" element={<UserPage />} />
           <Route path="newUser" element={<NewUser />} />
+          <Route path="deleteUser" element={<DeleteUser />} />
           <Route path="garage" element={<Garage />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoPage />} />

@@ -10,7 +10,6 @@ export default function TaskCard({ taskData, taskCompletedClickHandler, taskDele
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
       <CardContent>
-        {/* <Typography>{taskData.category}</Typography> */}
         <Typography>{taskData.name}</Typography>
         <Typography><em>{taskData.description}</em></Typography>
         <Typography>{`Due by ${taskData.date_due}`}</Typography>

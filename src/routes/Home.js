@@ -22,6 +22,9 @@ const Home = () => {
         <Button color="secondary" variant="outlined">
           <Link to="/newUser">Create a New User</Link>
         </Button>
+        <Button color="secondary" variant="outlined">
+          <Link to="/deleteUser" state={existingUsers}>Delete a User</Link>
+        </Button>
     </Stack>
   );
 };
