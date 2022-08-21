@@ -14,33 +14,26 @@ const Garage = () => {
   const [vehicleTasks, setVehicleTasks] = useState();
   console.log(vehicleTasks);
 
-  // useEffect(() => {
-  //   if (location.state !== undefined) {
-  //     fetch(`http://localhost:9292/vehicles/${location.state.id}`)
-  //       .then((r) => r.json())
-  //       .then((d) => setVehicleData(d));
-  //   }
-  // }, [location.state]);
-
   useEffect(() => {
     fetch(`http://localhost:9292/vehicles/${vehicleData.id}/tasks`)
       .then((r) => r.json())
       .then((d) => setVehicleTasks(d));
   }, [vehicleData]);
 
-  // function taskCompletedClickHandler(task) {
-  //   fetch(`http://localhost:9292/tasks/${task.id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       completed: !task.completed,
-  //     }),
-  //   })
-  //     .then((r) => r.json())
-  //     .then((d) => setVehicleData(d));
-  // }
+  function taskCompletedClickHandler(task) {
+    console.log(task);
+    fetch(`http://localhost:9292/tasks/${task.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        completed: !task.completed,
+      }),
+    })
+      .then((r) => r.json())
+      .then((d) => setVehicleTasks(d));
+  }
 
   function renderVehicleData() {
     if (vehicleData) {
@@ -69,6 +62,7 @@ const Garage = () => {
                 <TaskCard
                   taskData={task}
                   key={task.id}
+                  taskCompletedClickHandler={taskCompletedClickHandler}
                 />
               );
             })}
@@ -80,7 +74,7 @@ const Garage = () => {
         <Stack direction="column" spacing={2} alignItems="center">
           <Typography>No upcoming maintenance! Lucky you.</Typography>
         </Stack>
-      )
+      );
     }
   }
 
