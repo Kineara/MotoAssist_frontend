@@ -9,7 +9,7 @@ import TaskCard from "../components/TaskCard";
 const Garage = () => {
   const location = useLocation();
   const [vehicleData, setVehicleData] = useState(location.state);
-  const [vehicleTasks, setVehicleTasks] = useState();
+  const [vehicleTasks, setVehicleTasks] = useState([]);
   //const ownerId = vehicleData.owner_id
   //console.log(vehicleData);
 
@@ -58,7 +58,7 @@ const Garage = () => {
   }
 
   function renderVehicleTasks() {
-    if (vehicleTasks !== undefined) {
+    if (vehicleTasks.length > 0) {
       return (
         <Stack direction="column" spacing={2} alignItems="center">
           <Typography>Upcoming Maintenance:</Typography>
