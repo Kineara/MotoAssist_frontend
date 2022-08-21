@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-export default function BasicCard({ vehicleData }) {
+export default function BasicCard({ vehicleData, handleDelete }) {
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
       <CardContent>
@@ -20,8 +20,18 @@ export default function BasicCard({ vehicleData }) {
       </CardContent>
       <CardActions>
         <Link to="/garage" state={vehicleData}>
-          <Button size="small">Go to Garage</Button>
+          <Button size="small" variant="outlined">
+            Go to Garage
+          </Button>
         </Link>
+        <Button
+          size="small"
+          variant="outlined"
+          color="secondary"
+          onClick={() => handleDelete(vehicleData.id)}
+        >
+          Delete :(
+        </Button>
       </CardActions>
     </Card>
   );
