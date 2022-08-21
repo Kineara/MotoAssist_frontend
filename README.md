@@ -10,4 +10,10 @@ MotoAssist allows a user to create an individual profile, store individual vehic
 Requires the backend API to function, which can be found at https://github.com/Kineara/phase-3-sinatra-react-project
 
 ## Use
-Follow the instructions in the backend's readme, and then use ```npm start``` to launch the app.
+Follow the instructions in the backend's readme to launch the server
+
+Install dependencies
+```npm install```
+
+Launch the app
+```npm start```
