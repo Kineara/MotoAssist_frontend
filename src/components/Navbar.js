@@ -12,12 +12,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About"];
 
-function DrawerAppBar(props) {
+function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -104,9 +104,8 @@ function DrawerAppBar(props) {
         </Box>
       </Box>
 
-      <Outlet />
     </>
   );
 }
 
-export default DrawerAppBar;
+export default Navbar;

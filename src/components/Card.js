@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-export default function BasicCard({ vehicleData, vehicleClickHandler }) {
+export default function BasicCard({ vehicleData }) {
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
       <CardContent>
@@ -19,13 +19,8 @@ export default function BasicCard({ vehicleData, vehicleClickHandler }) {
         <Typography variant="body2">{`${vehicleData.vehicle_type}`}</Typography>
       </CardContent>
       <CardActions>
-        <Link to="/garage">
-          <Button
-            onClick={() => vehicleClickHandler(vehicleData.id)}
-            size="small"
-          >
-            Go to Garage
-          </Button>
+        <Link to="/garage" state={vehicleData}>
+          <Button size="small">Go to Garage</Button>
         </Link>
       </CardActions>
     </Card>

@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useLocation} from 'react-router-dom';
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import BasicCard from "../components/Card";
 import Typography from "@mui/material/Typography";
 
-const UserPage = ({ userId, vehicleClickHandler }) => {
-  const [userData, setUserData] = useState([]);
+const UserPage = () => {
+  const location = useLocation();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:9292/users/${userId}`)
+    fetch(`http://localhost:9292/users/${location.state}`)
       .then((r) => r.json())
       .then((d) => setUserData(d));
-  }, [userId]);
+  }, [location.state]);
 
   function fillGarage() {
     let garage;
@@ -23,7 +25,6 @@ const UserPage = ({ userId, vehicleClickHandler }) => {
             <BasicCard
               vehicleData={vehicle}
               key={vehicle.id}
-              vehicleClickHandler={vehicleClickHandler}
             />
           );
         });

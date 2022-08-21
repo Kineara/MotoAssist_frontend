@@ -3,17 +3,12 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 
-const existingUsers = ({ existingUsers, userClickHandler }) => {
+const ExistingUsers = ({ existingUsers }) => {
   const userButtons = existingUsers.map((user) => {
+    const userId = user.id;
     return (
-      <Link to={`/user`} key={user.id}>
-        <Button
-          value={user.id}
-          onClick={(event) => userClickHandler(event.target.value)}
-          variant="outlined"
-        >
-          {user.name}
-        </Button>
+      <Link to={`/user`} key={user.id} state={userId}>
+        <Button variant="outlined">{user.name}</Button>
       </Link>
     );
   });
@@ -25,4 +20,4 @@ const existingUsers = ({ existingUsers, userClickHandler }) => {
   );
 };
 
-export default existingUsers;
+export default ExistingUsers;
