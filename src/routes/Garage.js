@@ -8,11 +8,10 @@ import TaskCard from "../components/TaskCard";
 
 const Garage = () => {
   const location = useLocation();
-  //console.log(location.state);
   const [vehicleData, setVehicleData] = useState(location.state);
-  //console.log(vehicleData);
   const [vehicleTasks, setVehicleTasks] = useState();
-  console.log(vehicleTasks);
+  //const ownerId = vehicleData.owner_id
+  //console.log(vehicleData);
 
   useEffect(() => {
     fetch(`http://localhost:9292/vehicles/${vehicleData.id}/tasks`)
@@ -21,7 +20,6 @@ const Garage = () => {
   }, [vehicleData]);
 
   function taskCompletedClickHandler(task) {
-    console.log(task);
     fetch(`http://localhost:9292/tasks/${task.id}`, {
       method: "PATCH",
       headers: {
@@ -33,6 +31,14 @@ const Garage = () => {
     })
       .then((r) => r.json())
       .then((d) => setVehicleTasks(d));
+  }
+
+  function taskDeleteClickHandler(task) {
+    fetch(`http://localhost:9292/tasks/${task.id}`, {
+      method: "DELETE"
+    })
+    .then((r) => r.json())
+    .then((d) => setVehicleTasks(d));
   }
 
   function renderVehicleData() {
@@ -63,6 +69,7 @@ const Garage = () => {
                   taskData={task}
                   key={task.id}
                   taskCompletedClickHandler={taskCompletedClickHandler}
+                  taskDeleteClickHandler={taskDeleteClickHandler}
                 />
               );
             })}
@@ -82,7 +89,7 @@ const Garage = () => {
     <Stack direction="column" alignItems="center" spacing={2}>
       {renderVehicleData()}
       {renderVehicleTasks()}
-      <Link to="/user">
+      <Link to={"/user"} state={vehicleData.user_id}>
         <Button variant="outlined" color="secondary">
           Back to Your Vehicles
         </Button>

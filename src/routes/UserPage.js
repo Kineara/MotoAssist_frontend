@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 
 const UserPage = () => {
   const location = useLocation();
+  console.log(location.state);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
 
-export default function TaskCard({ taskData, taskCompletedClickHandler }) {
+export default function TaskCard({ taskData, taskCompletedClickHandler, taskDeleteClickHandler }) {
 
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
@@ -19,7 +18,7 @@ export default function TaskCard({ taskData, taskCompletedClickHandler }) {
       </CardContent>
       <CardActions>
         <Button size="small" variant="outlined" onClick={() => taskCompletedClickHandler(taskData)}>Mark Completed</Button>
-        <Button size="small" variant="outlined">Delete</Button>
+        <Button size="small" variant="outlined" onClick={() => taskDeleteClickHandler(taskData)}>Delete</Button>
       </CardActions>
     </Card>
   );
