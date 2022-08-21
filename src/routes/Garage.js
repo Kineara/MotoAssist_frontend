@@ -10,8 +10,6 @@ const Garage = () => {
   const location = useLocation();
   const [vehicleData, setVehicleData] = useState(location.state);
   const [vehicleTasks, setVehicleTasks] = useState([]);
-  //const ownerId = vehicleData.owner_id
-  //console.log(vehicleData);
 
   useEffect(() => {
     fetch(`http://localhost:9292/vehicles/${vehicleData.id}/tasks`)
