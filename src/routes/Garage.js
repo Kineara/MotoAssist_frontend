@@ -33,10 +33,10 @@ const Garage = () => {
 
   function taskDeleteClickHandler(task) {
     fetch(`http://localhost:9292/tasks/${task.id}`, {
-      method: "DELETE"
+      method: "DELETE",
     })
-    .then((r) => r.json())
-    .then((d) => setVehicleTasks(d));
+      .then((r) => r.json())
+      .then((d) => setVehicleTasks(d));
   }
 
   function renderVehicleData() {
@@ -87,6 +87,9 @@ const Garage = () => {
     <Stack direction="column" alignItems="center" spacing={2}>
       {renderVehicleData()}
       {renderVehicleTasks()}
+      <Link to={"/addTask"} state={vehicleData}>
+        <Button variant="outlined">Schedule some Maintenance</Button>
+      </Link>
       <Link to={"/user"} state={vehicleData.user_id}>
         <Button variant="outlined" color="secondary">
           Back to Your Vehicles

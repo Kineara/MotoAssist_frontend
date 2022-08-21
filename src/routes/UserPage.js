@@ -45,7 +45,7 @@ const UserPage = () => {
         {fillGarage()}
       </Stack>
       <Typography>Been out shopping? Add your new ride!</Typography>
-      <Link to="/">
+      <Link to="/addVehicle" state={userData}>
         <Button color="secondary" variant="outlined">
           Add Vehicle
         </Button>
